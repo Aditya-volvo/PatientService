@@ -5,6 +5,10 @@ import com.example.patientservice.dto.PatientResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface PatientService {
     ResponseEntity<PatientResponse> registerPatient(@Valid PatientRequest patientRequest);
+
+    List<PatientResponse> getListOfPatients();
 }

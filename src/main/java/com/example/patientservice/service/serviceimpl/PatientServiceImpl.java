@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PatientServiceImpl implements PatientService {
@@ -25,5 +27,11 @@ public class PatientServiceImpl implements PatientService {
         Patient saved = patientRepositiory.save(patient);
         return globalResponseEntity.ok(saved);
 
+    }
+
+    @Override
+    public List<PatientResponse> getListOfPatients() {
+        List<Patient> patients = patientRepositiory.findAllPatients();
+        return patients.stream().map(globalMapper::mapToResposeDto).toList();
     }
 }
