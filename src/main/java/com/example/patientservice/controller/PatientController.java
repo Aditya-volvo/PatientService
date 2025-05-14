@@ -30,4 +30,14 @@ public class PatientController {
     public ResponseEntity<PatientResponse> getPatientById(@PathVariable Integer patientId){
         return patientService.getPatientById(patientId);
     }
+
+    @PutMapping("/{patientId}")
+    public ResponseEntity<PatientResponse> updatePatientById(@PathVariable Integer patientId, @Valid @RequestBody PatientRequest patientRequest){
+        return patientService.updatePatientById(patientId,patientRequest);
+    }
+
+    @DeleteMapping("/{patientId}")
+    public String deletePatientById(@PathVariable Integer patientId){
+
+    }
 }
