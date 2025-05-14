@@ -15,4 +15,6 @@ public interface PatientService {
     ResponseEntity<PatientResponse> getPatientById(Integer patientId);
 
     ResponseEntity<PatientResponse> updatePatientById(Integer patientId, @Valid PatientRequest patientRequest);
+
+    String deletePatientById(Integer patientId);
 }

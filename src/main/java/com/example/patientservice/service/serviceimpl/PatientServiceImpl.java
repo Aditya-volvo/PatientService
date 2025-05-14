@@ -2,6 +2,7 @@ package com.example.patientservice.service.serviceimpl;
 
 import com.example.patientservice.dto.PatientRequest;
 import com.example.patientservice.dto.PatientResponse;
+import com.example.patientservice.exception.PatientNotFoundException;
 import com.example.patientservice.mapper.GlobalMapper;
 import com.example.patientservice.model.Patient;
 import com.example.patientservice.response.GlobalResponseEntity;
@@ -37,13 +38,15 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public ResponseEntity<PatientResponse> getPatientById(Integer patientId) {
-        Patient patient = patientRepositiory.findById(patientId).orElseThrow();
+        Patient patient = patientRepositiory.findById(patientId)
+                .orElseThrow(()-> new PatientNotFoundException("Patient By ID:"+patientId+"Not found"));
         return globalResponseEntity.ok(patient);
     }
 
     @Override
     public ResponseEntity<PatientResponse> updatePatientById(Integer patientId, PatientRequest patientRequest) {
-        Patient patient = patientRepositiory.findById(patientId).orElseThrow();
+        Patient patient = patientRepositiory.findById(patientId)
+                .orElseThrow(()-> new PatientNotFoundException("Patient By ID:"+patientId+"Not found"));
         patient.setPatientName(patientRequest.getPatientName());
         patient.setPatient_email(patientRequest.getPatient_email());
         patient.setPhone_number(patientRequest.getPhone_number());
@@ -51,5 +54,13 @@ public class PatientServiceImpl implements PatientService {
         patient.setDateOfBirth(patientRequest.getDateOfBirth());
         Patient saved = patientRepositiory.save(patient);
         return  globalResponseEntity.ok(saved);
+    }
+
+    @Override
+    public String deletePatientById(Integer patientId) {
+        Patient patient = patientRepositiory.findById(patientId)
+                .orElseThrow(()-> new PatientNotFoundException("Patient By ID:"+patientId+"Not found"));
+        patientRepositiory.delete(patient);
+        return "The patient with id :"+patient.getPatientId()+" was deleted ";
     }
 }
