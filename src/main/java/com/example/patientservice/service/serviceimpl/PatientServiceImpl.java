@@ -40,4 +40,16 @@ public class PatientServiceImpl implements PatientService {
         Patient patient = patientRepositiory.findById(patientId).orElseThrow();
         return globalResponseEntity.ok(patient);
     }
+
+    @Override
+    public ResponseEntity<PatientResponse> updatePatientById(Integer patientId, PatientRequest patientRequest) {
+        Patient patient = patientRepositiory.findById(patientId).orElseThrow();
+        patient.setPatientName(patientRequest.getPatientName());
+        patient.setPatient_email(patientRequest.getPatient_email());
+        patient.setPhone_number(patientRequest.getPhone_number());
+        patient.setGender(patientRequest.getGender());
+        patient.setDateOfBirth(patientRequest.getDateOfBirth());
+        Patient saved = patientRepositiory.save(patient);
+        return  globalResponseEntity.ok(saved);
+    }
 }

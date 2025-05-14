@@ -13,4 +13,6 @@ public interface PatientService {
     List<PatientResponse> getListOfPatients();
 
     ResponseEntity<PatientResponse> getPatientById(Integer patientId);
+
+    ResponseEntity<PatientResponse> updatePatientById(Integer patientId, @Valid PatientRequest patientRequest);
 }
