@@ -38,6 +38,6 @@ public class PatientController {
 
     @DeleteMapping("/{patientId}")
     public String deletePatientById(@PathVariable Integer patientId){
-
+        return  patientService.deletePatientById(patientId);
     }
 }
