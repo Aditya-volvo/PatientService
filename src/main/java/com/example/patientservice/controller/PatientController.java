@@ -27,17 +27,17 @@ public class PatientController {
     }
 
     @GetMapping("/{patientId}")
-    public ResponseEntity<PatientResponse> getPatientById(@PathVariable Integer patientId){
+    public ResponseEntity<PatientResponse> getPatientById(@PathVariable Long patientId){
         return patientService.getPatientById(patientId);
     }
 
     @PutMapping("/{patientId}")
-    public ResponseEntity<PatientResponse> updatePatientById(@PathVariable Integer patientId, @Valid @RequestBody PatientRequest patientRequest){
+    public ResponseEntity<PatientResponse> updatePatientById(@PathVariable Long patientId, @Valid @RequestBody PatientRequest patientRequest){
         return patientService.updatePatientById(patientId,patientRequest);
     }
 
     @DeleteMapping("/{patientId}")
-    public String deletePatientById(@PathVariable Integer patientId){
+    public String deletePatientById(@PathVariable Long patientId){
         return  patientService.deletePatientById(patientId);
     }
 }

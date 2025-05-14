@@ -12,9 +12,9 @@ public interface PatientService {
 
     List<PatientResponse> getListOfPatients();
 
-    ResponseEntity<PatientResponse> getPatientById(Integer patientId);
+    ResponseEntity<PatientResponse> getPatientById(Long patientId);
 
-    ResponseEntity<PatientResponse> updatePatientById(Integer patientId, @Valid PatientRequest patientRequest);
+    ResponseEntity<PatientResponse> updatePatientById(Long patientId, @Valid PatientRequest patientRequest);
 
-    String deletePatientById(Integer patientId);
+    String deletePatientById(Long patientId);
 }

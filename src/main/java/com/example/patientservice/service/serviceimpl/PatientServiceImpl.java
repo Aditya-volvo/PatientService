@@ -7,7 +7,7 @@ import com.example.patientservice.mapper.GlobalMapper;
 import com.example.patientservice.model.Patient;
 import com.example.patientservice.response.GlobalResponseEntity;
 import com.example.patientservice.service.PatientService;
-import com.example.patientservice.repository.PatientRepositiory;
+import com.example.patientservice.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PatientServiceImpl implements PatientService {
 
-    private  final PatientRepositiory patientRepositiory;
+    private  final PatientRepository patientRepositiory;
     private  final GlobalMapper globalMapper;
     private  final GlobalResponseEntity globalResponseEntity;
 
@@ -37,14 +37,14 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public ResponseEntity<PatientResponse> getPatientById(Integer patientId) {
+    public ResponseEntity<PatientResponse> getPatientById(Long patientId) {
         Patient patient = patientRepositiory.findById(patientId)
                 .orElseThrow(()-> new PatientNotFoundException("Patient By ID:"+patientId+"Not found"));
         return globalResponseEntity.ok(patient);
     }
 
     @Override
-    public ResponseEntity<PatientResponse> updatePatientById(Integer patientId, PatientRequest patientRequest) {
+    public ResponseEntity<PatientResponse> updatePatientById(Long patientId, PatientRequest patientRequest) {
         Patient patient = patientRepositiory.findById(patientId)
                 .orElseThrow(()-> new PatientNotFoundException("Patient By ID:"+patientId+"Not found"));
         patient.setPatientName(patientRequest.getPatientName());
@@ -57,7 +57,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public String deletePatientById(Integer patientId) {
+    public String deletePatientById(Long patientId) {
         Patient patient = patientRepositiory.findById(patientId)
                 .orElseThrow(()-> new PatientNotFoundException("Patient By ID:"+patientId+"Not found"));
         patientRepositiory.delete(patient);
