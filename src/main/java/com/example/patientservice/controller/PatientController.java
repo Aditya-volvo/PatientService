@@ -25,4 +25,9 @@ public class PatientController {
     public List<PatientResponse> getListOfPatients(){
         return patientService.getListOfPatients();
     }
+
+    @GetMapping("/{patientId}")
+    public ResponseEntity<PatientResponse> getPatientById(@PathVariable Integer patientId){
+        return patientService.getPatientById(patientId);
+    }
 }
