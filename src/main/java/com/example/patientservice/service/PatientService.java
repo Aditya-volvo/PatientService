@@ -11,4 +11,6 @@ public interface PatientService {
     ResponseEntity<PatientResponse> registerPatient(@Valid PatientRequest patientRequest);
 
     List<PatientResponse> getListOfPatients();
+
+    ResponseEntity<PatientResponse> getPatientById(Integer patientId);
 }

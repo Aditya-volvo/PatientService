@@ -34,4 +34,10 @@ public class PatientServiceImpl implements PatientService {
         List<Patient> patients = patientRepositiory.findAllPatients();
         return patients.stream().map(globalMapper::mapToResposeDto).toList();
     }
+
+    @Override
+    public ResponseEntity<PatientResponse> getPatientById(Integer patientId) {
+        Patient patient = patientRepositiory.findById(patientId).orElseThrow();
+        return globalResponseEntity.ok(patient);
+    }
 }
